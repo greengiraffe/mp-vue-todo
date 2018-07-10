@@ -1,17 +1,15 @@
 <template>
   <div class="app">
     <h1>Vue.js ToDo</h1>
-    <Todo />
-    <Todo />
-    <Todo />
+    <TodoList />
   </div>
 </template>
 
 <script>
-import Todo from './Todo.vue'
+import TodoList from './TodoList.vue'
 
 export default {
-  components: { Todo }
+  components: { TodoList }
 }
 </script>
 
