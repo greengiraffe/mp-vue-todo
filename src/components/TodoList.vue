@@ -1,9 +1,12 @@
 <template>
-  <ul class="todo-list">
-    <li class="todo-list__item"><Todo /></li>
-    <li class="todo-list__item"><Todo /></li>
-    <li class="todo-list__item"><Todo /></li>
-  </ul>
+  <div>
+    <h2>ToDo</h2>
+    <ul class="todo-list">
+      <li class="todo-list__item"><Todo /></li>
+      <li class="todo-list__item"><Todo /></li>
+      <li class="todo-list__item"><Todo /></li>
+    </ul>
+  </div>
 </template>
 
 <script>

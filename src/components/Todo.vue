@@ -22,7 +22,7 @@ export default {
 <style lang="scss">
 .todo {
   display: flex;
-  padding: 1rem;
+  padding: 1rem 0;
 
   + .todo {
     border-top: 1px solid lightgray;
