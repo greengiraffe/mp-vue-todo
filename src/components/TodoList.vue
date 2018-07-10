@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .todo-list {
   margin: 0;
   padding: 0;

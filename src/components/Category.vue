@@ -10,7 +10,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .category {
   cursor: pointer;
   padding: 0.5rem 0;
