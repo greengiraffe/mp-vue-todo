@@ -7,7 +7,13 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
+    filename: 'main.js',
+    publicPath: '/dist/'
+  },
+  devServer: {
+    compress: true,
+    port: 9000
+
   },
   module: {
     rules: [

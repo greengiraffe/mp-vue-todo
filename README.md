@@ -1,4 +1,6 @@
-# Vue.js ToDo
+# Vue.js ToDo-App
+
+ToDo-App for 
 
 ## Installation
 
@@ -6,23 +8,14 @@
 2. Install yarn: `npm install -g yarn`
 3. Install dependencies: `yarn install`
 
-### Building & Running
+### Development
 
-1. Running `yarn build` generates the output to the `dist` folder
-2. Use a server to serve the root directory (that includes the `index.html`)
+- Run `yarn dev` to start a local development server that supports hot-reloading on `localhost:9000`.
+
+### Building for Production
+
+Running `yarn build` generates the output to the `dist` folder. _Optional:_ Use a server to serve the root directory (that includes the `index.html`)
 
 ### More commands
 
-- `yarn dev` to run webpack in watch mode
 - `yarn lint` to lint all .vue and .js files in the `src` directory
-
-## Devlog
-
-First steps, adding the most important dependencies:
-
-```
-npm install -g yarn
-
-yarn add vue vue-router
-yarn add --dev vuex webpack webpack-cli
-```
