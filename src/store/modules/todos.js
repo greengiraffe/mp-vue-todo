@@ -9,7 +9,7 @@ export default {
   state: {
     todos: [
       { id: 1, text: 'Create vue.js ToDo App', important: true, done: false, due: new Date('2018-07-25T09:45:00'), category: 1 },
-      { id: 2, text: 'Buy milk', important: false, done: false, due: undefined, category: 2 },
+      { id: 2, text: 'Buy milk', important: false, done: true, due: undefined, category: 2 },
       { id: 3, text: 'Watch Batman', important: false, done: false, due: undefined, category: undefined }
     ]
   },
