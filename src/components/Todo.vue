@@ -1,16 +1,16 @@
 <template>
   <div class="todo">
-    <fa-icon class="todo__done" :icon="doneIcon"></fa-icon>
+    <fa-icon @click="toggleDone" class="todo__done" :icon="doneIcon"></fa-icon>
     <span class="todo__text">{{ todo.text }}</span>
     <div class="todo__info">
       <template v-if="todo.due">
         <time :datetime="todo.due" class="todo__due">{{ dueDateString }}</time>
       </template>
       <div class="todo__actions">
-        <fa-icon icon="trash"></fa-icon>
+        <fa-icon @click="deleteTodo" icon="trash"></fa-icon>
         <fa-icon icon="edit"></fa-icon>
       </div>
-      <fa-icon class="todo__important" :icon="[importantIconPrefix, 'star']"></fa-icon>
+      <fa-icon @click="toggleImportant" class="todo__important" :icon="[importantIconPrefix, 'star']"></fa-icon>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
       due: Date,
       done: Boolean,
       important: Boolean,
+      id: Number,
     }
   },
   computed: {
@@ -39,6 +40,28 @@ export default {
         day: 'numeric',
         month: 'short',
       })
+    }
+  },
+  methods: {
+    toggleImportant: function () {
+      this.updateTodo({
+        ...this.todo,
+        important: !this.todo.important
+      })
+    },
+    toggleDone: function () {
+      this.updateTodo({
+        ...this.todo,
+        done: !this.todo.done
+      })
+    },
+    updateTodo: function (updatedTodo) {
+      this.$store.commit('UPDATE_TODO', updatedTodo)
+    },
+    deleteTodo: function () {
+      if(confirm(`Do you want to delete "${this.todo.text}"?`)) {
+        this.$store.commit('REMOVE_TODO', this.todo.id)
+      }
     }
   }
 }
