@@ -2,9 +2,10 @@
   <div>
     <h2>Categories</h2>
     <ul class="category-list">
-      <li class="category-list__item"><Category /></li>
-      <li class="category-list__item"><Category /></li>
-      <li class="category-list__item"><Category /></li>
+      <li class="category-list__item"><Category name="All" /></li>
+      <li v-for="cat in categories" :key="cat.id" class="category-list__item">
+        <Category v-bind="cat" />
+      </li>
       <li class="category-list__item"><CategoryInput /></li>
     </ul>
   </div>
@@ -15,7 +16,12 @@ import Category from './Category.vue'
 import CategoryInput from './CategoryInput.vue'
 
 export default {
-  components: { Category, CategoryInput }
+  components: { Category, CategoryInput },
+  computed: {
+    categories: function () {
+      return this.$store.state.categories.categories
+    }
+  }
 }
 </script>
 

@@ -1,12 +1,14 @@
 <template>
 <div class="category">
-  <span class="category__name">Category name</span>
+  <span class="category__name">{{ name }}</span>
 </div>
 </template>
 
 <script>
 export default {
-
+  props: {
+    name: String
+  }
 }
 </script>
 
