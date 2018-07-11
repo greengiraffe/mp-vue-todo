@@ -19,8 +19,7 @@ export default {
   components: { Todo, TodoInput },
   computed: {
     todos () {
-      console.log(this.$store.state.todos.length)
-      return this.$store.state.todos.todos
+      return this.$store.getters.sortedTodos
     }
   }
 }

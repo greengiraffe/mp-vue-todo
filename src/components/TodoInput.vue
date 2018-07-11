@@ -1,27 +1,49 @@
 <template>
   <div class="todo-input">
-    <input type="text" class="todo-input__field" placeholder="...new Todo">
+    <input v-model="text" type="text" class="todo-input__field" placeholder="...new Todo">
     <div class="todo-input__options">
       <div>
         <label for="todo-due-date-input">Due</label>
-        <input class="todo-input__date" type="date" name="Todo due date" id="todo-due-date-input">
+        <input ref="dateInput" class="todo-input__date" type="date" name="Todo due date" id="todo-due-date-input">
       </div>
       <div>
         <label for="todo-category-select">Category</label>
-        <select class="todo-input__category" name="Category" id="todo-category-select">
-          <option value="category1">Category 1</option>
-          <option value="category2">Category 2</option>
-          <option value="category3">Category 3</option>
+        <select v-model="category" class="todo-input__category" name="Category" id="todo-category-select">
+          <option value="1">Category 1</option>
+          <option value="2">Category 2</option>
         </select>
       </div>
     </div>
-    <button class="todo-input__button">Add</button>
+    <button @click="addTodo" class="todo-input__button">Add</button>
   </div>
 </template>
 
 <script>
 export default {
-
+  data: function () {
+    return {
+      text: '',
+      category: undefined,
+      due: undefined,
+    }
+  },
+  methods: {
+    addTodo: function () {
+      this.$store.commit('ADD_TODO', {
+        text: this.text,
+        category: this.category, // TODO use value instead of name
+        due: this.$refs.dateInput.valueAsDate,
+        important: false,
+        done: false
+      })
+      this.cleanInputs();
+    },
+    cleanInputs: function () {
+      this.text = ''
+      this.category = ''
+      this.$refs.dateInput.value = ''
+    }
+  }
 }
 </script>
 
