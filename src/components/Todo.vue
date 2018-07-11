@@ -3,7 +3,7 @@
     <fa-icon class="todo__check" :icon="['far', 'circle']"></fa-icon>
     <span class="todo__name">Name of Todo</span>
     <div class="todo__info">
-      <time class="todo__due">18.07.2018 14:00</time>
+      <time class="todo__due">18.07.2018</time>
       <fa-icon :icon="['far', 'star']"></fa-icon>
       <div class="todo__actions">
         <fa-icon icon="edit"></fa-icon>

@@ -31,16 +31,23 @@ body {
 
 button {
   background: none;
-  border: 2px solid #0043a8e1;
+  border: 2px solid #0043a8;
+  color: #0043a8;
   border-radius: 8px;
   padding: 0.2rem 0.5rem;
   font-size: inherit;
   cursor: pointer;
 
   &:hover {
-    background: #0043a8e1;
+    background: #0043a8;
     color: #fff;
   }
+}
+
+input, select {
+  border: 0;
+  border-bottom: 2px solid lightgray;
+  font-size: inherit;
 }
 
 .app {

@@ -5,15 +5,17 @@
       <li class="todo-list__item"><Todo /></li>
       <li class="todo-list__item"><Todo /></li>
       <li class="todo-list__item"><Todo /></li>
+      <li class="todo-list__item"><TodoInput /></li>
     </ul>
   </div>
 </template>
 
 <script>
 import Todo from './Todo.vue'
+import TodoInput from './TodoInput.vue'
 
 export default {
-  components: { Todo }
+  components: { Todo, TodoInput }
 }
 </script>
 
@@ -22,5 +24,9 @@ export default {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.todo-list__item:last-child {
+  margin-top: 2rem;
 }
 </style>

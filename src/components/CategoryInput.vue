@@ -17,8 +17,6 @@ export default {
 }
 
 .category-input__field {
-  border: 0;
-  border-bottom: 2px solid lightgray;
   width: 100%;
 }
 
