@@ -63,6 +63,8 @@ function sortByDateDesc (a, b) {
 }
 
 function sortByDateAsc (a, b) {
+  if (!a.due && b.due) return 1
+  if (a.due && !b.due) return -1
   if (a.due && b.due) return a.due - b.due
   return 0
 }
