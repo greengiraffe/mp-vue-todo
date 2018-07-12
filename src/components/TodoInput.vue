@@ -4,7 +4,7 @@
     <div class="todo-input__options">
       <div>
         <label for="todo-due-date-input">Due</label>
-        <input ref="dateInput" class="todo-input__date" type="date" name="Todo due date" id="todo-due-date-input">
+        <input ref="dateInput" :value="dueDateString" class="todo-input__date" type="date" name="Todo due date" id="todo-due-date-input">
       </div>
       <div>
         <label for="todo-category-select">Category</label>
@@ -13,15 +13,35 @@
         </select>
       </div>
     </div>
-    <button @click="addTodo" class="todo-input__button">Add</button>
+    <button @click="emitClick" class="todo-input__button">{{ buttonTitle }}</button>
   </div>
 </template>
 
 <script>
-import { ADD_TODO } from '../store'
 
 export default {
+  props: {
+    todo: {
+      text: String,
+      due: Date,
+      done: Boolean,
+      important: Boolean,
+      category: Number,
+      id: Number,
+    },
+    buttonTitle: {
+      type: String,
+      default: 'Add'
+    }
+  },
   data: function () {
+    if (this.todo) {
+      return {
+        text: this.todo.text,
+        category: this.todo.category,
+        due: this.todo.due,
+      }
+    }
     return {
       text: '',
       category: undefined,
@@ -31,11 +51,18 @@ export default {
   computed: {
     categories: function () {
       return this.$store.state.categories.categories
+    },
+    dueDateString: function () {
+      if (!this.todo || !this.todo.due) return ''
+      const yyyy = this.todo.due.getFullYear().toString();                                  
+      const mm = ('0' + (this.todo.due.getMonth() + 1).toString()).slice(-2);
+      const dd  = ('0' + (this.todo.due.getDate().toString())).slice(-2);
+      return `${yyyy}-${mm}-${dd}`
     }
   },
   methods: {
-    addTodo: function () {
-      this.$store.commit(ADD_TODO, {
+    emitClick: function () {
+      this.$emit('edited', {
         text: this.text,
         category: this.category,
         due: this.$refs.dateInput.valueAsDate,
@@ -58,7 +85,8 @@ export default {
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 5rem;
-  grid-gap: 0.5rem; 
+  grid-gap: 0.5rem;
+  width: 100%;
 }
 
 .todo-input__field {

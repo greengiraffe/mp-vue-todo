@@ -13,7 +13,7 @@
       <li v-for="todo in filter(todos)" :key="todo.id" class="todo-list__item">
         <Todo :todo="todo" />
       </li>
-      <li class="todo-list__item"><TodoInput /></li>
+      <li class="todo-list__item"><TodoInput @edited="addTodo"/></li>
     </ul>
   </div>
 </template>
@@ -21,6 +21,7 @@
 <script>
 import Todo from './Todo.vue'
 import TodoInput from './TodoInput.vue'
+import { ADD_TODO } from '../store'
 
 const SORT_BY_NAME = 'SORT_BY_NAME'
 const SORT_BY_DATE_DESC = 'SORT_BY_DATE_DESC'
@@ -59,7 +60,16 @@ export default {
       return this.todos.filter(todo => {
         return todo.category === this.selectedCategory
       })
-    } 
+    },
+    addTodo: function (todo) {
+      this.$store.commit(ADD_TODO, {
+        text: todo.text,
+        category: todo.category,
+        due: todo.due,
+        important: false,
+        done: false,
+      })
+    }
   }
 }
 </script>

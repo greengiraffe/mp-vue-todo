@@ -1,24 +1,31 @@
 <template>
   <div class="todo">
-    <fa-icon @click="toggleDone" class="todo__done" :icon="doneIcon"></fa-icon>
-    <span class="todo__text">{{ todo.text }}</span>
-    <div class="todo__info">
-      <template v-if="todo.due">
-        <time :datetime="todo.due" class="todo__due">{{ dueDateString }}</time>
-      </template>
-      <div class="todo__actions">
-        <fa-icon @click="deleteTodo" icon="trash"></fa-icon>
-        <fa-icon icon="edit"></fa-icon>
+    <template v-if="editMode">
+      <TodoInput :todo="todo" buttonTitle="Save" @edited="saveEdit"/>
+    </template>
+    <template v-else>
+      <fa-icon @click="toggleDone" class="todo__done" :icon="doneIcon"></fa-icon>
+      <span class="todo__text">{{ todo.text }}</span>
+      <div class="todo__info">
+        <template v-if="todo.due">
+          <time :datetime="todo.due" class="todo__due">{{ dueDateString }}</time>
+        </template>
+        <div class="todo__actions">
+          <fa-icon @click="deleteTodo" icon="trash"></fa-icon>
+          <fa-icon @click="editMode = !editMode" icon="edit"></fa-icon>
+        </div>
+        <fa-icon @click="toggleImportant" class="todo__important" :icon="[importantIconPrefix, 'star']"></fa-icon>
       </div>
-      <fa-icon @click="toggleImportant" class="todo__important" :icon="[importantIconPrefix, 'star']"></fa-icon>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
 import { UPDATE_TODO, REMOVE_TODO } from '../store'
+import TodoInput from './TodoInput.vue'
 
 export default {
+  components: { TodoInput },
   props: {
     todo: {
       text: String,
@@ -26,6 +33,11 @@ export default {
       done: Boolean,
       important: Boolean,
       id: Number,
+    },
+  },
+  data: function () {
+    return {
+      editMode: false
     }
   },
   computed: {
@@ -56,6 +68,14 @@ export default {
         ...this.todo,
         done: !this.todo.done
       })
+    },
+    saveEdit: function (todo) {
+      const { due, text, category } = todo
+      this.updateTodo({
+        ...this.todo,
+        due, text, category
+      })
+      this.editMode = false
     },
     updateTodo: function (updatedTodo) {
       this.$store.commit(UPDATE_TODO, updatedTodo)
