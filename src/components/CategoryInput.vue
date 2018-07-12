@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { ADD_CATEGORY } from '../store'
+
 export default {
   data: function () {
     return {
@@ -14,7 +16,7 @@ export default {
   },
   methods: {
     addCategory: function () {
-      this.$store.commit('ADD_CATEGORY', {
+      this.$store.commit(ADD_CATEGORY, {
         name: this.name
       })
       this.clearInput()

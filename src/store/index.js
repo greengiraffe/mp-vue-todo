@@ -11,3 +11,5 @@ export default new Vuex.Store({
     categories
   }
 })
+
+export * from './mutation-types'

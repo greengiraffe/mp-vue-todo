@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { UPDATE_TODO, REMOVE_TODO } from '../store'
+
 export default {
   props: {
     todo: {
@@ -56,11 +58,11 @@ export default {
       })
     },
     updateTodo: function (updatedTodo) {
-      this.$store.commit('UPDATE_TODO', updatedTodo)
+      this.$store.commit(UPDATE_TODO, updatedTodo)
     },
     deleteTodo: function () {
       if(confirm(`Do you want to delete "${this.todo.text}"?`)) {
-        this.$store.commit('REMOVE_TODO', this.todo.id)
+        this.$store.commit(REMOVE_TODO, this.todo.id)
       }
     }
   }

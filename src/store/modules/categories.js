@@ -1,16 +1,14 @@
 // Categories Store Module
-
-const SET_CATEGORIES = 'SET_CATEGORIES'
-const ADD_CATEGORY = 'ADD_CATEGORY'
-const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
-const UPDATE_CATEGORY = 'UPDATE_CATEGORY'
+import { SET_CATEGORIES, ADD_CATEGORY, REMOVE_CATEGORY, UPDATE_CATEGORY, SET_SELECTED_CATEGORY } from '../mutation-types'
 
 export default {
   state: {
     categories: [
       { id: 1, name: 'HTW' },
-      { id: 2, name: 'Groceries' }
-    ]
+      { id: 2, name: 'Groceries' },
+      { id: 3, name: 'Movies' }
+    ],
+    selected: undefined
   },
   getters: {
     // Getters behave similar to computed properties
@@ -30,6 +28,9 @@ export default {
         if (cat.id === updatedCategory.id) return updatedCategory
         return cat
       })
+    },
+    [SET_SELECTED_CATEGORY] (state, id) {
+      state.selected = id
     }
   },
   actions: {

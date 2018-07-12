@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { ADD_TODO } from '../store'
+
 export default {
   data: function () {
     return {
@@ -33,12 +35,12 @@ export default {
   },
   methods: {
     addTodo: function () {
-      this.$store.commit('ADD_TODO', {
+      this.$store.commit(ADD_TODO, {
         text: this.text,
         category: this.category,
         due: this.$refs.dateInput.valueAsDate,
         important: false,
-        done: false
+        done: false,
       })
       this.cleanInputs();
     },

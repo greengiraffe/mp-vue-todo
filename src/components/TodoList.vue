@@ -10,7 +10,7 @@
       </label>
     </div>
     <ul class="todo-list__list">
-      <li v-for="todo in todos" :key="todo.id" class="todo-list__item">
+      <li v-for="todo in filter(todos)" :key="todo.id" class="todo-list__item">
         <Todo :todo="todo" />
       </li>
       <li class="todo-list__item"><TodoInput /></li>
@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: {
-    todos () {
+    todos: function () {
       switch (this.sortSelect) {
         case SORT_BY_NAME:
           return this.$store.getters.sortedTodosByName
@@ -48,7 +48,18 @@ export default {
         case SORT_BY_DATE_ASC:
           return this.$store.getters.sortedTodosByDateAsc
       }
+    },
+    selectedCategory: function () {
+      return this.$store.state.categories.selected
     }
+  },
+  methods: {
+    filter: function (todos) {
+      if (this.selectedCategory === undefined) return this.todos
+      return this.todos.filter(todo => {
+        return todo.category === this.selectedCategory
+      })
+    } 
   }
 }
 </script>
