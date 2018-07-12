@@ -4,7 +4,7 @@
     <div class="todo-input__options">
       <div>
         <label for="todo-due-date-input">Due</label>
-        <input ref="dateInput" :value="dueDateString" class="todo-input__date" type="date" name="Todo due date" id="todo-due-date-input">
+        <input ref="dateInput" :value="dueDateString" @blur="due = $event.target.valueAsDate" class="todo-input__date" type="date" name="Todo due date" id="todo-due-date-input">
       </div>
       <div>
         <label for="todo-category-select">Category</label>
@@ -53,10 +53,10 @@ export default {
       return this.$store.state.categories.categories
     },
     dueDateString: function () {
-      if (!this.todo || !this.todo.due) return ''
-      const yyyy = this.todo.due.getFullYear().toString();                                  
-      const mm = ('0' + (this.todo.due.getMonth() + 1).toString()).slice(-2);
-      const dd  = ('0' + (this.todo.due.getDate().toString())).slice(-2);
+      if (!this.due) return ''
+      const yyyy = this.due.getFullYear().toString();                                  
+      const mm = ('0' + (this.due.getMonth() + 1).toString()).slice(-2);
+      const dd  = ('0' + (this.due.getDate().toString())).slice(-2);
       return `${yyyy}-${mm}-${dd}`
     }
   },
@@ -65,7 +65,7 @@ export default {
       this.$emit('edited', {
         text: this.text,
         category: this.category,
-        due: this.$refs.dateInput.valueAsDate,
+        due: this.due,
         important: false,
         done: false,
       })
@@ -74,7 +74,7 @@ export default {
     cleanInputs: function () {
       this.text = ''
       this.category = ''
-      this.$refs.dateInput.value = ''
+      this.due = ''
     }
   }
 }
