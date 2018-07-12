@@ -9,8 +9,7 @@
       <div>
         <label for="todo-category-select">Category</label>
         <select v-model="category" class="todo-input__category" name="Category" id="todo-category-select">
-          <option value="1">Category 1</option>
-          <option value="2">Category 2</option>
+          <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
     </div>
@@ -27,11 +26,16 @@ export default {
       due: undefined,
     }
   },
+  computed: {
+    categories: function () {
+      return this.$store.state.categories.categories
+    }
+  },
   methods: {
     addTodo: function () {
       this.$store.commit('ADD_TODO', {
         text: this.text,
-        category: this.category, // TODO use value instead of name
+        category: this.category,
         due: this.$refs.dateInput.valueAsDate,
         important: false,
         done: false
