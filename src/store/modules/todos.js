@@ -1,5 +1,6 @@
 // Todos Store Module
 import { SET_TODOS, ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../mutation-types'
+import { count } from '../../../node_modules/rxjs/operator/count'
 
 export default {
   state: {
@@ -31,6 +32,9 @@ export default {
     sortedTodosByDateAsc: state => {
       let sorted = state.todos.sort(sortByDateAsc)
       return sorted
+    },
+    getTodoCountForCategory: state => categoryID => {
+      return state.todos.filter(todo => todo.category === categoryID).length
     }
   },
   mutations: {

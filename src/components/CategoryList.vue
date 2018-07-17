@@ -7,16 +7,15 @@
         class="category-list__item"
         :class="{ active: selected === undefined}"
       >
-        <Category name="All" />
+        <Category name="All" :id="-1" :class="{ active: selected === undefined}"/>
       </li>
       <li
         @click="selectCategory(cat.id)"
         v-for="cat in categories"
         :key="cat.id"
         class="category-list__item"
-        :class="{ active: selected === cat.id}"
       >
-        <Category v-bind="cat" />
+        <Category v-bind="cat" :class="{ active: selected === cat.id}"/>
       </li>
       <li class="category-list__item"><CategoryInput /></li>
     </ul>
@@ -36,7 +35,7 @@ export default {
     },
     selected: function () {
       return this.$store.state.categories.selected
-    }
+    },
   },
   methods: {
     selectCategory: function(id) {
@@ -51,15 +50,11 @@ export default {
   margin: 0;
   padding: 0;
   list-style-type: none;
-
-  &:last-child {
-    margin-top: 2rem;
-  }
 }
 
 .category-list__item {
-  &.active {
-    text-decoration: underline;
+  &:last-child {
+    margin-top: 2rem;
   }
 }
 </style>

@@ -64,6 +64,21 @@ input, select {
 }
 
 .app__title {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  &::after {
+    content: "";
+    display: block;
+    margin: 2rem 0;
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+  }
 }
+
+.app__hairline {
+}
+
 </style>
 

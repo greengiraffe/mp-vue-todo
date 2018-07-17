@@ -1,5 +1,5 @@
 <template>
-  <div class="todo">
+  <div class="todo" :class="{ done: todo.done, important: todo.important }">
     <template v-if="editMode">
       <TodoInput :todo="todo" buttonTitle="Save" @edited="saveEdit"/>
     </template>
@@ -106,6 +106,18 @@ export default {
 
   svg {
     cursor: pointer;
+  }
+
+  &.done {
+    .todo__text {
+      text-decoration: line-through;
+    }
+  }
+
+  &.important {
+    .fa-star {
+      color: #fbbf08;
+    }
   }
 }
 
