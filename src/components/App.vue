@@ -11,9 +11,13 @@
 <script>
 import CategoryList from './CategoryList.vue'
 import TodoList from './TodoList.vue'
+import { API_FETCH_DATA } from '../store'
 
 export default {
-  components: { CategoryList, TodoList }
+  components: { CategoryList, TodoList },
+  created: function () {
+    this.$store.dispatch(API_FETCH_DATA)
+  }
 }
 </script>
 

@@ -1,13 +1,11 @@
 // Categories Store Module
 import { SET_CATEGORIES, ADD_CATEGORY, REMOVE_CATEGORY, UPDATE_CATEGORY, SET_SELECTED_CATEGORY } from '../mutation-types'
+import { API_ADD_CATEGORY } from '../actions'
+import { postCategory } from '../../api'
 
 export default {
   state: {
-    categories: [
-      { id: 1, name: 'HTW' },
-      { id: 2, name: 'Groceries' },
-      { id: 3, name: 'Movies' }
-    ],
+    categories: [],
     selected: undefined
   },
   getters: {
@@ -35,5 +33,10 @@ export default {
   },
   actions: {
     // actions for asynchronous mutations (e.g. API calls)
+    [API_ADD_CATEGORY]: ({ commit }, category) => {
+      postCategory(category).then(category => {
+        commit(ADD_CATEGORY, category)
+      })
+    }
   }
 }

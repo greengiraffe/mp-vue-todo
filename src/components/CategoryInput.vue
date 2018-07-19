@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { ADD_CATEGORY } from '../store'
+import { API_ADD_CATEGORY } from '../store'
 
 export default {
   data: function () {
@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     addCategory: function () {
-      this.$store.commit(ADD_CATEGORY, {
+      this.$store.dispatch(API_ADD_CATEGORY, {
         name: this.name
       })
       this.clearInput()

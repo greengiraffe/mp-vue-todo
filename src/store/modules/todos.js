@@ -1,19 +1,11 @@
 // Todos Store Module
 import { SET_TODOS, ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../mutation-types'
-import { count } from '../../../node_modules/rxjs/operator/count'
+import { API_REMOVE_TODO } from '../actions'
+import { deleteTodo } from '../../api'
 
 export default {
   state: {
-    todos: [
-      { id: 1, text: 'Create vue.js ToDo App', important: false, done: false, due: new Date('2018-07-25T09:45:00'), category: 1 },
-      { id: 2, text: 'Buy milk', important: true, done: false, due: undefined, category: 2 },
-      { id: 3, text: 'Watch Batman', important: false, done: true, due: undefined, category: 3 },
-      { id: 4, text: 'Watch Star Wars', important: false, done: true, due: undefined, category: 3 },
-      { id: 5, text: 'Watch Lord of the Rings', important: false, done: false, due: undefined, category: 3 },
-      { id: 6, text: 'Buy spaghetti', important: false, done: false, due: new Date('2018-07-20T09:45:00'), category: 2 },
-      { id: 7, text: 'Do math homework', important: false, done: false, due: new Date('2018-07-18T09:45:00'), category: 1 },
-      { id: 8, text: 'Do a workout', important: true, done: false, due: undefined, category: undefined }
-    ]
+    todos: []
   },
   getters: {
     doneTodos: state => {
@@ -56,6 +48,11 @@ export default {
   },
   actions: {
     // actions for asynchronous mutations (e.g. API calls)
+    [API_REMOVE_TODO]: ({ commit }, id) => {
+      deleteTodo(id).then(
+        commit(REMOVE_TODO, id)
+      )
+    }
   }
 }
 

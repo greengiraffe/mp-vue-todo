@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import { UPDATE_TODO, REMOVE_TODO } from '../store'
+import { UPDATE_TODO } from '../store'
+import { API_REMOVE_TODO } from '../store'
 import TodoInput from './TodoInput.vue'
 
 export default {
@@ -82,7 +83,7 @@ export default {
     },
     deleteTodo: function () {
       if(confirm(`Do you want to delete "${this.todo.text}"?`)) {
-        this.$store.commit(REMOVE_TODO, this.todo.id)
+        this.$store.dispatch(API_REMOVE_TODO, this.todo.id)
       }
     }
   }
