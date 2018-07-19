@@ -21,7 +21,7 @@
 <script>
 import Todo from './Todo.vue'
 import TodoInput from './TodoInput.vue'
-import { ADD_TODO } from '../store'
+import { API_ADD_TODO } from '../store'
 
 const SORT_BY_NAME = 'SORT_BY_NAME'
 const SORT_BY_DATE_DESC = 'SORT_BY_DATE_DESC'
@@ -62,7 +62,7 @@ export default {
       })
     },
     addTodo: function (todo) {
-      this.$store.commit(ADD_TODO, {
+      this.$store.dispatch(API_ADD_TODO, {
         text: todo.text,
         category: todo.category,
         due: todo.due,

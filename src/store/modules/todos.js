@@ -1,7 +1,7 @@
 // Todos Store Module
 import { SET_TODOS, ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../mutation-types'
-import { API_REMOVE_TODO } from '../actions'
-import { deleteTodo } from '../../api'
+import { API_REMOVE_TODO, API_ADD_TODO } from '../actions'
+import { deleteTodo, postTodo } from '../../api'
 
 export default {
   state: {
@@ -51,6 +51,11 @@ export default {
     [API_REMOVE_TODO]: ({ commit }, id) => {
       deleteTodo(id).then(
         commit(REMOVE_TODO, id)
+      )
+    },
+    [API_ADD_TODO]: ({ commit }, todo) => {
+      postTodo(todo).then(
+        commit(ADD_TODO, todo)
       )
     }
   }
