@@ -1,7 +1,8 @@
 <template>
   <div class="app">
     <h1 class="app__title">Vue.js ToDo</h1>
-    <div class="app__grid">
+    <LoadingScreen v-if="loading" />
+    <div v-else class="app__grid">
       <CategoryList />
       <TodoList />
     </div>
@@ -11,10 +12,16 @@
 <script>
 import CategoryList from './CategoryList.vue'
 import TodoList from './TodoList.vue'
+import LoadingScreen from './LoadingScreen.vue'
 import { API_FETCH_DATA } from '../store'
 
 export default {
-  components: { CategoryList, TodoList },
+  components: { CategoryList, TodoList, LoadingScreen },
+  computed: {
+    loading: function () {
+      return this.$store.state.loading
+    }
+  },
   created: function () {
     this.$store.dispatch(API_FETCH_DATA)
   }

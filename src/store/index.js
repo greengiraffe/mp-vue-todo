@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import todos from './modules/todos'
 import categories from './modules/categories'
-import { SET_CATEGORIES, SET_TODOS } from './mutation-types'
+import { SET_CATEGORIES, SET_TODOS, LOAD_DATA_REQUEST, LOAD_DATA_SUCCESS } from './mutation-types'
 import { API_FETCH_DATA } from './actions'
 import { getCategories, getTodos } from '../api'
 
@@ -13,12 +13,25 @@ export default new Vuex.Store({
     todos,
     categories
   },
+  state: {
+    loading: true
+  },
+  mutations: {
+    [LOAD_DATA_REQUEST]: state => {
+      state.loading = true
+    },
+    [LOAD_DATA_SUCCESS]: state => {
+      state.loading = false
+    }
+  },
   actions: {
     [API_FETCH_DATA]: ({ commit }) => {
+      commit(LOAD_DATA_REQUEST)
       Promise.all([getCategories, getTodos])
         .then(responses => {
           commit(SET_CATEGORIES, responses[0])
           commit(SET_TODOS, responses[1])
+          commit(LOAD_DATA_SUCCESS)
         })
     }
   }

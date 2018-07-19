@@ -1,3 +1,7 @@
+// General mutations
+export const LOAD_DATA_REQUEST = 'LOAD_DATA'
+export const LOAD_DATA_SUCCESS = 'LOAD_DATA_SUCCESS'
+
 // Todo mutations
 export const SET_TODOS = 'SET_TODOS'
 export const ADD_TODO = 'ADD_TODO'
