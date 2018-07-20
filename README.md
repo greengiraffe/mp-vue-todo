@@ -1,6 +1,6 @@
 # Vue.js ToDo-App
 
-ToDo-App for 
+ToDo-App for Media Programming. Live on https://greengiraffe.github.io/mp-vue-todo/
 
 ## Installation
 

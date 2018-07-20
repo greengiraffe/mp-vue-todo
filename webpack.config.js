@@ -1,5 +1,7 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   entry: [
@@ -7,13 +9,12 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-    publicPath: '/dist/'
+    filename: '[name].[hash].js'
   },
   devServer: {
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000
-
   },
   module: {
     rules: [
@@ -28,6 +29,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/index.html')
+    })
   ]
 }
