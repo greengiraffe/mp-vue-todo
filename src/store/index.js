@@ -29,8 +29,15 @@ export default new Vuex.Store({
       commit(LOAD_DATA_REQUEST)
       Promise.all([getCategories, getTodos])
         .then(responses => {
+          let todos = responses[1].map(todo => {
+            if (!todo.due) return todo
+            return {
+              ...todo,
+              due: new Date(todo.due)
+            }
+          })
           commit(SET_CATEGORIES, responses[0])
-          commit(SET_TODOS, responses[1])
+          commit(SET_TODOS, todos)
           commit(LOAD_DATA_SUCCESS)
         })
     }

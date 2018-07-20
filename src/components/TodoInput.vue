@@ -8,7 +8,7 @@
       </div>
       <div>
         <label for="todo-category-select">Category</label>
-        <select v-model="category" class="todo-input__category" name="Category" id="todo-category-select">
+        <select v-model="category_id" class="todo-input__category" name="Category" id="todo-category-select">
           <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
         </select>
       </div>
@@ -26,7 +26,7 @@ export default {
       due: Date,
       done: Boolean,
       important: Boolean,
-      category: Number,
+      category_id: Number,
       id: Number,
     },
     buttonTitle: {
@@ -38,14 +38,14 @@ export default {
     if (this.todo) {
       return {
         text: this.todo.text,
-        category: this.todo.category,
+        category_id: this.todo.category_id,
         due: this.todo.due,
       }
     }
     return {
       text: '',
-      category: undefined,
-      due: undefined,
+      category_id: 1, // TODO de-hardcode (breaks if no category is available)
+      due: null,
     }
   },
   computed: {
@@ -64,7 +64,7 @@ export default {
     emitClick: function () {
       this.$emit('edited', {
         text: this.text,
-        category: this.category,
+        category_id: this.category_id,
         due: this.due,
         important: false,
         done: false,
@@ -73,7 +73,7 @@ export default {
     },
     cleanInputs: function () {
       this.text = ''
-      this.category = ''
+      this.category_id = 1 // TODO de-hardcode
       this.due = ''
     }
   }

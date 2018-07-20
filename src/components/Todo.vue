@@ -22,7 +22,7 @@
 
 <script>
 import { UPDATE_TODO } from '../store'
-import { API_REMOVE_TODO } from '../store'
+import { API_REMOVE_TODO, API_UPDATE_TODO } from '../store'
 import TodoInput from './TodoInput.vue'
 
 export default {
@@ -71,15 +71,15 @@ export default {
       })
     },
     saveEdit: function (todo) {
-      const { due, text, category } = todo
+      const { due, text, category_id } = todo
       this.updateTodo({
         ...this.todo,
-        due, text, category
+        due, text, category_id
       })
       this.editMode = false
     },
     updateTodo: function (updatedTodo) {
-      this.$store.commit(UPDATE_TODO, updatedTodo)
+      this.$store.dispatch(API_UPDATE_TODO, updatedTodo)
     },
     deleteTodo: function () {
       if(confirm(`Do you want to delete "${this.todo.text}"?`)) {

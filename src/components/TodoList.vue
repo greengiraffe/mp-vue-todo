@@ -58,13 +58,13 @@ export default {
     filter: function (todos) {
       if (this.selectedCategory === undefined) return this.todos
       return this.todos.filter(todo => {
-        return todo.category === this.selectedCategory
+        return todo.category_id === this.selectedCategory
       })
     },
     addTodo: function (todo) {
       this.$store.dispatch(API_ADD_TODO, {
         text: todo.text,
-        category: todo.category,
+        category_id: todo.category_id,
         due: todo.due,
         important: false,
         done: false,

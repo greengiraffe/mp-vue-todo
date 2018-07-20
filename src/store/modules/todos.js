@@ -1,7 +1,7 @@
 // Todos Store Module
 import { SET_TODOS, ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../mutation-types'
-import { API_REMOVE_TODO, API_ADD_TODO } from '../actions'
-import { deleteTodo, postTodo } from '../../api'
+import { API_REMOVE_TODO, API_ADD_TODO, API_UPDATE_TODO } from '../actions'
+import { deleteTodo, postTodo, putTodo } from '../../api'
 
 export default {
   state: {
@@ -26,7 +26,7 @@ export default {
       return sorted
     },
     getTodoCountForCategory: state => categoryID => {
-      return state.todos.filter(todo => todo.category === categoryID).length
+      return state.todos.filter(todo => todo.category_id === categoryID).length
     }
   },
   mutations: {
@@ -54,9 +54,19 @@ export default {
       )
     },
     [API_ADD_TODO]: ({ commit }, todo) => {
-      postTodo(todo).then(
-        commit(ADD_TODO, todo)
-      )
+      postTodo(todo).then(response => {
+        let newTodo = response
+        if (newTodo.due) {
+          newTodo = {
+            ...newTodo,
+            due: new Date(newTodo.due)
+          }
+        }
+        commit(ADD_TODO, newTodo)
+      })
+    },
+    [API_UPDATE_TODO]: ({ commit }, todo) => {
+      putTodo(todo).then(response => commit(UPDATE_TODO, todo))
     }
   }
 }
