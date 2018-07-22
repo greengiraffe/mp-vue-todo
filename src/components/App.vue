@@ -1,11 +1,13 @@
 <template>
   <div class="app">
     <h1 class="app__title">Vue.js ToDo</h1>
-    <LoadingScreen v-if="loading" />
-    <div v-else class="app__grid">
-      <CategoryList />
-      <TodoList />
-    </div>
+    <transition name="fade" mode="out-in">
+      <LoadingScreen v-if="loading" />
+      <div v-else class="app__grid">
+        <CategoryList />
+        <TodoList />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -89,6 +91,13 @@ input, select {
 }
 
 .app__hairline {
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
 </style>
